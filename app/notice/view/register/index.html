@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title> register / question_save </title>
+	<style>
+		form h1{text-align: center;}
+		form{
+			width:800px;display:block;margin:0 auto;
+		}
+		.title{
+			width: 100%;padding:10px;
+		}
+		.title label{text-align: center; font-weight:600;}
+	</style>
+</head>
+<body>
+
+	<form action="{:url('notice/register/question_save')}" method="POST">
+		<h1>ACCA学前评估</h1>
+		<input type="hidden" data-name='source' name="question_source" value="question_01">
+
+		<div class="title">
+			<label for="">你目前职业是学生、上班族？</label>
+			<input type="radio" data-name='radio' name='question_name_01' value="1" checked>学生
+			<input type="radio" data-name='radio' name='question_name_01' value="2">上班族
+			<input type="radio" data-name='radio' name='question_name_01' value="3">其他
+		</div>
+
+		<div class="title">
+			<label for="">你的英语水平：</label>
+			<input type="radio" data-name='radio' name='question_name_02' value="1">没过四级
+			<input type="radio" data-name='radio' name='question_name_02' value="2" checked>四级
+			<input type="radio" data-name='radio' name='question_name_02' value="3">六级
+		</div>
+		
+		<div class="title">
+			<label for="">姓名：</label>
+			<input type="input" data-name='input' name='question_name_03' value="张三">
+		</div>
+
+		<div class="title">
+			<label for="">手机号码：</label>
+			<input type="phone" data-name='phone' name='question_name_04' value="17610900163">
+		</div>
+
+		<div class="title">
+			<label for="">常用邮箱：</label>
+			<input type="email" data-name='email' name='question_name_05' value="2929006594@qq.com">
+		</div>
+
+		<input type="hidden" name="question_type" value="source##radio##radio##input##phone##email">
+		<input type="hidden" name="write_time" value="60">
+
+		<div class="title">
+			<input type="submit" value="提交">
+		</div>
+	</form>
+
+<hr>
+<hr>
+<hr>
+
+	<form action="{:url('notice/register/question_save')}" method="POST">
+		<h1>ACCA学习资料领取</h1>
+		<input type="hidden" data-name='source' name="question_source" value="question_02">
+		
+		<div class="title">
+			<label for="">姓名：</label>
+			<input type="input" data-name='input' name='question_name_01' value="张三san">
+		</div>
+
+		<div class="title">
+			<label for="">手机号码：</label>
+			<input type="phone" data-name='phone' name='question_name_02' value="17610900163">
+		</div>
+
+		<div class="title">
+			<label for="">常用邮箱：</label>
+			<input type="email" data-name='email' name='question_name_03' value="2929006594@qq.com">
+		</div>
+
+		<div class="title">
+			<label for="">微信号：</label>
+			<input type="input" data-name='input' name='question_name_04' value="fs15535256683">
+		</div>
+
+		<input type="hidden" name="question_type" value="source##input##phone##email##input">
+		<input type="hidden" name="write_time" value="40">
+
+		<div class="title">
+			<input type="submit" value="提交">
+		</div>
+	</form>
+
+
+<hr>
+<hr>
+<hr>
+
+	<form action="{:url('notice/register/question_save')}" method="POST">
+		<h1>管理会计师CMA报考条件快速测试通道</h1>
+		<input type="hidden" data-name='source' name="question_source" value="question_03">
+		
+		<div class="title">
+			<label for="">姓名：</label>
+			<input type="input" data-name='input' name='question_name_01' value="张三san">
+		</div>
+
+		<div class="title">
+			<label for="">最高学历：</label>
+			<input type="radio" data-name='radio' name='question_name_02' value="1" checked>中专
+			<input type="radio" data-name='radio' name='question_name_02' value="2">大专
+			<input type="radio" data-name='radio' name='question_name_02' value="3">本科
+			<input type="radio" data-name='radio' name='question_name_02' value="3">研究生
+		</div>
+
+		<div class="title">
+			<label for="">工作年限：</label>
+			<input type="radio" data-name='radio' name='question_name_03' value="1" checked>大学在读
+			<input type="radio" data-name='radio' name='question_name_03' value="2">1-3年
+			<input type="radio" data-name='radio' name='question_name_03' value="3">3-5年
+			<input type="radio" data-name='radio' name='question_name_03' value="3">5-10年
+			<input type="radio" data-name='radio' name='question_name_03' value="3">10年以上
+		</div>
+		
+		<div class="title">
+			<label for="">所获职称：</label>
+			<input type="input" data-name='input' name='question_name_04' value="fs15535256683">
+		</div>
+
+		<div class="title">
+			<label for="">手机号码：</label>
+			<input type="phone" data-name='phone' name='question_name_05' value="17610900163">
+		</div>
+
+		<div class="title">
+			<label for="">常用邮箱：</label>
+			<input type="email" data-name='email' name='question_name_06' value="2929006594@qq.com">
+		</div>
+
+		<input type="hidden" name="question_type" value="source##input##radio##radio##input##phone##email">
+		<input type="hidden" name="write_time" value="80">
+
+		<div class="title">
+			<input type="submit" value="提交">
+		</div>
+	</form>
+
+</body>
+</html>
