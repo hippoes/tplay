@@ -27,7 +27,7 @@
     <div class="layui-tab">
         <ul class="layui-tab-title">
             <li class="layui-this">报名表</li>
-            <li><a href="{:url('admin/register/question_add')}" class="a_menu">新增报名表</a></li>
+            <!--<li><a href="{:url('admin/register/question_add')}" class="a_menu">新增报名表</a></li>-->
         </ul>
     </div>
 
@@ -49,7 +49,7 @@
         </tr>
         </thead>
         <tbody>
-            {volist name="datas" id="vo"}
+            {volist name="$question_datas" id="vo"}
             <tr>
                 <td>{$vo.id}</td>
                 <td>{$vo.question_title}</td>
@@ -57,8 +57,8 @@
                 <td>{$vo.update_time}</td>
                 <td class="operation-menu">
                     <div class="layui-btn-group">
-                        <a href="{:url('register/question_list',['id'=>$vo.id])}" class="layui-btn layui-btn-xs a_menu layui-btn-primary" id="{$vo.id}" style="margin-right: 0;font-size:12px;"><i class="layui-icon"> &#xe63c;</i></a>
-                        <a href="{:url('register/question_edit',['id'=>$vo.id])}" class="layui-btn layui-btn-xs a_menu layui-btn-primary" id="{$vo.id}" style="margin-right: 0;font-size:12px;"><i class="layui-icon"></i></a>
+                        <a href="{:url('register/question_answer_list',['id'=>$vo.id])}" class="layui-btn layui-btn-xs a_menu layui-btn-primary" id="{$vo.id}" style="margin-right: 0;font-size:12px;"><i class="layui-icon"> &#xe63c;</i></a>
+                        <!--<a href="{:url('register/question_edit',['id'=>$vo.id])}" class="layui-btn layui-btn-xs a_menu layui-btn-primary" id="{$vo.id}" style="margin-right: 0;font-size:12px;"><i class="layui-icon"></i></a>-->
                         <a class="layui-btn layui-btn-xs layui-btn-primary delete" id="{$vo.id}" style="margin-right: 0;font-size:12px;"><i class="layui-icon"></i></a>
                     </div>
                 </td>
@@ -67,6 +67,7 @@
 
         </tbody>
     </table>
+    <div style="padding:0 20px;">{$datas->render()}</div>
 
     {include file="public/foot"}
 

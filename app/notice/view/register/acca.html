@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <title>ACCA学前评估</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"> 
+        <!-- <link rel="stylesheet" href="css/pc.css"> -->
+        <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+        <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+        <script src="__JS__/jquery.min.js"></script>
+        <script src="__JS__/register/public.js"></script>
+
+    </head>
+    <body>
+        <div id="jqContent">
+            <div class="box">
+                <div class="survey">
+                    <div class="surveyhead">
+                        <h1>ACCA学前评估</h1>
+                        <p>ACCA学前评估顾问通过你的问卷选择进行评估，评估内容包括：英语水平是否适合学习ACCA、未来ACCA学习进度情况、ACCA给你带来的影响，并提供适当建议。</p>
+                    </div>
+                    <div class="surveycontent">
+                        <div class="div_question" id="div1">
+                            <div id="divTitle1" class="div_title_question">1. 你目前职业是学生、上班族？<span class="req">*</span></div>
+                            <div class="div_table_radio_question" id="divquestion1">
+                                <ul class="ulradiocheck">
+                                    <li>
+                                        <a href="javascript:" class="jqRadio" rel="q1_1"></a>
+                                        <input type="radio" name="q1" id="q1_1" value="学生">
+                                        <label for="q1_1">学生</label>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:" class="jqRadio" rel="q1_2"></a>
+                                        <input type="radio" name="q1" id="q1_2" value="上班族">
+                                        <label for="q1_2">上班族</label>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:" class="jqRadio" rel="q1_3"></a>
+                                        <input type="radio" name="q1" id="q1_3" value="其他">
+                                        <label for="q1_3">其他</label>
+                                    </li>
+                                </ul>
+                                <div style="clear:both;"></div>
+                            </div>
+                            <div class="errormsg">请选择选项</div>
+                        </div>
+                        <div class="div_question" id="div2">
+                            <div id="divTitle2" class="div_title_question"> 2. 你的英语水平：<span class="req">*</span></div>
+                            <div class="div_table_radio_question" id="divquestion2">
+                                <ul class="ulradiocheck">
+                                    <li>
+                                        <a href="javascript:" class="jqRadio" rel="q2_1"></a>
+                                        <input type="radio" name="q2" id="q2_1" value="没过四级">
+                                        <label for="q2_1">没过四级</label>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:" class="jqRadio" rel="q2_2"></a>
+                                        <input type="radio" name="q2" id="q2_2" value="四级">
+                                        <label for="q2_2">四级</label>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:" class="jqRadio" rel="q2_3"></a>
+                                        <input type="radio" name="q2" id="q2_3" value="六级">
+                                        <label for="q2_3">六级</label>
+                                    </li>
+                                </ul>
+                                <div style="clear:both;"></div>
+                            </div>
+                            <div class="errormsg">请选择选项</div>
+                        </div>
+                        <div class="div_question" id="div3">
+                            <div id="divTitle3" class="div_title_question"> 3. 姓名：<span class="req">*</span></div>
+                            <div class="div_table_radio_question" id="divquestion3">
+                                <input class="inputtext" type="text" >
+                                <div style="clear:both;"></div>
+                            </div>
+                            <div class="errormsg">请输入内容</div>
+                        </div>
+                        <div class="div_question" id="div4">
+                            <div id="divTitle4" class="div_title_question"> 4. 手机号码：<span class="req">*</span></div>
+                            <div class="div_table_radio_question" id="divquestion4">
+                                <input class="inputtext" type="text" >
+                                <div style="clear:both;"></div>
+                            </div>
+                            <div class="errormsg">请输入内容</div>
+                        </div>
+                        <div class="div_question" id="div5">
+                            <div id="divTitle5" class="div_title_question"> 5. 常用邮箱：<span class="req">*</span></div>
+                            <div class="div_table_radio_question" id="divquestion5">
+                                <input class="inputtext" type="text" >
+                                <div style="clear:both;"></div>
+                            </div>
+                            <div class="errormsg">请输入内容</div>
+                        </div>
+                    </div>
+                    <div class="sub_btn">
+                        <input type="button" class="submitbutton" value="提交" id="submit_button">
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script src="__PUBLIC__/layui/layui.js"></script>
+    <script src="__PUBLIC__/jquery/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            // 进入页面时间戳
+            var timestamp = Date.parse(new Date()) / 1000;
+            console.log(timestamp);
+
+            // 提交设备
+            var equipment = '';
+            var system = { 
+                 win: false,
+                 mac: false,
+                 xll: false,
+                 ipad: false
+            };
+            var p = navigator.platform;
+             system.win = p.indexOf("Win") == 0;
+             system.mac = p.indexOf("Mac") == 0;
+             system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
+             system.ipad = (navigator.userAgent.match(/iPad/i) != null) ? true : false;
+             if (system.win || system.mac || system.xll || system.ipad) {
+                 equipment = 'PC';
+             } else {  
+                 var ua = navigator.userAgent.toLowerCase();  
+                 if(ua.match(/MicroMessenger/i)=="micromessenger") {  
+                     equipment = '微信浏览器';
+                 } else {  
+                     equipment = '手机';
+                 }  
+             }
+            console.log(equipment);
+        
+        // 单选动图切换
+        $(".ulradiocheck li").click(function(){
+            let i = $(this).index();//下标第一种写法
+            $(this).children("a").addClass("jqChecked");
+            $(this).siblings("li").children("a").removeClass("jqChecked");
+        });
+
+        // 点击提交
+        $(".submitbutton").click(function(){
+            let vocation = "";
+            let findvocation = $("#divquestion1 ul li");
+            for(i=0;i<findvocation.length;i++){
+                if(findvocation[i].firstElementChild.className == "jqRadio jqChecked"){
+                    vocation = findvocation[i].children[1].value;
+                }
+            }
+            let english = "";
+            let findenglish = $("#divquestion2 ul li");
+            for(i=0;i<findenglish.length;i++){
+                if(findenglish[i].firstElementChild.className == "jqRadio jqChecked"){
+                    english = findenglish[i].children[1].value;
+                }
+            }
+            let name = $("#divquestion3 input").val();
+            let phone = $("#divquestion4 input").val();
+            let email = $("#divquestion5 input").val();
+            console.log(vocation,english,name,phone,email);
+            if(vocation == "" || vocation == undefined || english == "" || english == undefined || name == "" || name == undefined
+            || phone == "" || phone == undefined || email == "" || email == undefined){
+                if(vocation == "" || vocation == undefined){
+                    $("#div1").addClass("border");
+                    $("#div1 .errormsg").show();
+                }else{
+                    $("#div1").removeClass("border");
+                    $("#div1 .errormsg").hide();
+                }
+                if(english == "" || english == undefined){
+                    $("#div2").addClass("border");
+                    $("#div2 .errormsg").show();
+                }else{
+                    $("#div2").removeClass("border");
+                    $("#div2 .errormsg").hide();
+                }
+                if(name == "" || name == undefined){
+                    $("#div3").addClass("border");
+                    $("#div3 .errormsg").show();
+                }else{
+                    $("#div3").removeClass("border");
+                    $("#div3 .errormsg").hide();
+                }
+                if(phone == "" || phone == undefined){
+                    $("#div4").addClass("border");
+                    $("#div4 .errormsg").show();
+                }else{
+                    if(isPhone(phone) == false){
+                        $("#div4").addClass("border");
+                        $("#div4 .errormsg").show();
+                    }else{
+                        s$("#div4").removeClass("border");
+                        $("#div4 .errormsg").hide();
+                    }
+                }
+                if(email == "" || email == undefined){
+                    $("#div5").addClass("border");
+                    $("#div5 .errormsg").show();
+                }else{
+                    $("#div5").removeClass("border");
+                    $("#div5 .errormsg").hide();
+                }
+                    return;
+            }else{
+                $(".div_question").removeClass("border");
+                $(".div_question .errormsg").hide();
+            }
+
+            layui.use(['layer', 'form'], function(){
+                var layer = layui.layer
+                    ,form = layui.form;
+
+                if(!(/^1[3456789]\d{9}$/.test(phone))){
+                    layer.msg('手机号码有误, 请重填');
+                    return false;
+                } else {
+                    $.ajax({
+                        type: 'POST',
+                        url: '__HREF__/notice/register/question_save',
+                        data: 'question_name_01=' + vocation + '&question_name_02=' + english + '&question_name_03=' + name + '&question_name_04=' + phone + '&question_name_05=' + email + '&question_source={$question.question_title}&question_id=question_0{$question.id}&init_timestamp=' + timestamp + '&equipment=' + equipment,
+                        dataType: 'json',
+                        success: function (res) {
+                            var res = JSON.parse(res);
+                            layer.msg(res.message);
+
+                            if (res.errorcode == 0) {
+                                setTimeout(function () {
+                                    window.location.href = '__HREF__/notice/register/question_form?question_form=success&question_id=1';
+                                }, 1500)
+                            }
+                        },
+                    });
+                }
+
+            });
+
+        });
+    });
+    </script>
+    </body>
+</html>

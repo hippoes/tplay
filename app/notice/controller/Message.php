@@ -8,23 +8,31 @@ use think\Db;
 
 class Message extends Controller
 {
-
-    public function send()
+    public function test($form = '', $username = '', $phone = '', $email = '')
     {
-        $form = !empty($_GET['form']) ? $_GET['form'] : '金立品CMA--快速评估';                 // 来源
-        $username = !empty($_GET['username']) ? $_GET['username'] : '冯帅';     // 昵称
-        $phone = !empty($_GET['phone']) ? $_GET['phone'] : '17610900163';              // 联系方式
-        $email = !empty($_GET['email']) ? $_GET['email'] : '2929006594@qq.com';              // 联系邮箱
+        $form = !empty($form) ? $form : '';                 // 来源
+        $username = !empty($username) ? $username : '';     // 昵称
+        $phone = !empty($phone) ? $phone : '';              // 联系方式
+        $email = !empty($email) ? $email : '';              // 联系邮箱
 
+        if (empty($form)) return false;
+        if (empty($username)) return false;
+        if (empty($phone)) return false;
+        if (empty($email)) return false;
 
-        // $form = '金立品CMA--快速评估';
-        // $form = '金立品ACCA--福利福利';
-        // $form = '金立品ACCA--ACCA礼包';
-        // $form = '金立品网络教育--学前评估';
-        $form = '金立品网络教育--学习资料';
-        $username = '测试学员';
-        $phone = '17610900000';
-        $email = '2929000000@qq.com';
+    }
+
+    public function send($form = '', $username = '', $phone = '', $email = '')
+    {
+        $form = !empty($form) ? $form : '';                 // 来源
+        $username = !empty($username) ? $username : '';     // 昵称
+        $phone = !empty($phone) ? $phone : '';              // 联系方式
+        $email = !empty($email) ? $email : '';              // 联系邮箱
+
+        if (empty($form)) return false;
+        if (empty($username)) return false;
+        if (empty($phone)) return false;
+        if (empty($email)) return false;
 
         // 通知消息内容拼接
         $str = '';
@@ -87,9 +95,11 @@ class Message extends Controller
         foreach ($sales_openids as $k => $v) {
             $sendResult = $sendObj->InitSendTemplate($v, $mp_template_msg, '', '');
             if($sendResult == 'ok') {
-                dump('发送成功:'.$v);
+//                dump('发送成功:'.$v);
+                return '发送成功:'.$v;
             } else {
-                dump('发送失败:'.$sendResult.' , openid:'.$v);
+//                dump('发送失败:'.$sendResult.' , openid:'.$v);
+                return '发送失败:'.$sendResult.' , openid:'.$v;
             }
         }
     }

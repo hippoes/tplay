@@ -20,14 +20,18 @@
             display:none;
             color:#fff;
         }
+        .top_button{
+            float:right;
+        }
     </style>
 </head>
 <body style="padding:10px;">
 <div class="tplay-body-div">
     <div class="layui-tab">
         <ul class="layui-tab-title">
-            <li class="layui-this">question01</li>
-            <li><a href="{:url('admin/admin/publish')}" class="a_menu">新增报名信息</a></li>
+            <li class="layui-this">{$question.question_title}</li>
+            <li><a href="{:url('admin/register/question_answer_add?question_id='.$question.id)}" class="a_menu">新增报名信息</a></li>
+            <a href="{:url('admin/register/export_answer_datas?question_id='.$question.id)}" class="a_menu"><button type="button" class="layui-btn top_button" title="导出所有数据">导出Excel</button></a>
         </ul>
     </div>
 
@@ -57,7 +61,7 @@
         </tr>
         </thead>
         <tbody>
-        {volist name="datas" id="vo"}
+        {volist name="$AnswerDatas" id="vo"}
         <tr>
             <td>{$vo.id}</td>
             {volist name="$vo.answer_datas" id="answer"}
@@ -65,11 +69,11 @@
             {/volist}
             <td>{$vo.create_time}</td>
             <td>{$vo.total_time}秒</td>
-            <td>{$vo.source}</td>
+            <td>{$vo.equipment}</td>
             <td>{$vo.ip}</td>
             <td class="operation-menu">
                 <div class="layui-btn-group">
-                    <a href="{:url('admin/publish',['id'=>$vo.id])}" class="layui-btn layui-btn-xs a_menu layui-btn-primary" id="{$vo.id}" style="margin-right: 0;font-size:12px;"><i class="layui-icon"></i></a>
+                    <a href="{:url('register/question_answer_edit',['answer_id'=>$vo.id, 'question_id' => $question.id])}" class="layui-btn layui-btn-xs a_menu layui-btn-primary" id="{$vo.id}" style="margin-right: 0;font-size:12px;"><i class="layui-icon"></i></a>
                     <a class="layui-btn layui-btn-xs layui-btn-primary delete" id="{$vo.id}" style="margin-right: 0;font-size:12px;"><i class="layui-icon"></i></a>
                 </div>
             </td>
@@ -77,6 +81,7 @@
         {/volist}
         </tbody>
     </table>
+    <div style="padding:0 20px;">{$datas->render()}</div>
 
     {include file="public/foot"}
 
@@ -86,15 +91,19 @@
             var id = $(this).attr('id');
             layer.confirm('确定要删除?', function(index) {
                 $.ajax({
-                    url:"{:url('admin/admin/delete')}",
+                    url:"{:url('admin/register/question_answer_del')}",
                     data:{id:id},
                     success:function(res) {
-                        layer.msg(res.msg);
-                        if(res.code == 1) {
+
+                        var res = JSON.parse(res);
+                        layer.msg(res.message);
+
+                        if(res.errorcode == 0) {
                             setTimeout(function(){
-                                location.href = res.url;
+                                window.location.reload()
                             },1500)
                         }
+                        
                     }
                 })
             })

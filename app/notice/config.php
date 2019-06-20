@@ -27,16 +27,16 @@ return [
 
     // 静态文件加载
 	'view_replace_str'  =>  [
-	    '__JS__' => '/static/js',
-	    '__CSS__' => '/static/css',
-	    '__IMG__' => '/static/images',
+	    '__JS__' => '/static/notice/js',
+	    '__CSS__' => '/static/notice/css',
+	    '__IMG__' => '/static/notice/images',
 	    '__UPLOAD__' => '/static/upload',
-	    '__FONT__' => '/static/font',
+	    '__FONT__' => '/static/notice/font',
 	    '__MODULE__' => '/static/module',
+        '__PUBLIC__'   => '/static/public',
 	    '__HREF__' => 'http://'.$_SERVER['HTTP_HOST'],
 	    '__ROOT__' => '/',
 	],
-
 
 	// 微信公众号参数
 	'wx_param' => [
