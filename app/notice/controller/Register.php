@@ -97,6 +97,7 @@ class Register extends Controller
             foreach ($question_config as $k=>$v) {
                 $rules['question_name_0'.($k+1)] = 'require';
                 $msg['question_name_0'.($k+1)] = $v['title'].'不能为空';
+                $question_key[] = $v['title'];
             }
 
             // 来源 数据判断是否含有 手机号码，邮箱地址进行验证
@@ -150,9 +151,18 @@ class Register extends Controller
         	// 表单填写内容转数组
         	foreach ($post as $key=>$value) {
                 if(strstr($key, 'question_name')) {
-                    $answer_datas[$key] = $value;
+                    $datas[] = $value;
                 }
             }
+
+            // 遍历转存储
+            foreach ($question_key as $key => $value) {
+                $answer_datas[$key]['title'] = $question_key[$key];
+                $answer_datas[$key]['value'] = $datas[$key];
+            }
+
+            // echo json_encode($answer_datas);
+
 
         	// 插入数据保存
         	$saveData = array(
@@ -166,12 +176,25 @@ class Register extends Controller
         	);
 
         	// 写入数据表
-        	$lastId = SaveOneData('tplay_question_answer', $saveData, true);
+       	    $lastId = SaveOneData('tplay_question_answer', $saveData, true);
+            
+            // dump($saveData);
+            // exit;
+            // $lastId = 39;
+
+            // 配置中销售openid列表
+            $sales_openids = config('openid_lists.sales');
+
+            // 求余计算 key
+            $key = $lastId % count($sales_openids);
+
+            // 轮循销售openid发送消息
+            $openid = $sales_openids[$key];
 
             // 报名成功发送消息通知到销售
             $source = $post['question_source'];
             $obj = new Message();
-            $obj->send($source, $username, $phone, $email);
+            $sendReturn = $obj->send($source, $username, $phone, $email, $openid);
 
        		$returnDatas['errorcode'] = !empty($lastId) ? '0' : '30008';        // 30008 添加失败
             $returnDatas['message'] = !empty($lastId) ? '添加成功' : '添加失败';

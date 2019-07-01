@@ -164,7 +164,7 @@ class Register extends Permissions
     {
         // 赋值传递
         $post = $this->request->param();
-
+        
         if (!empty($post['id'])) {
             $id = $post['id'];
 
@@ -190,6 +190,9 @@ class Register extends Permissions
                 $key[] = $v['title'];
             }
 
+            // dump($AnswerDatas);
+            // dump($key);
+            // exit;
             $this->assign('question', $question);
             $this->assign('answer_datas', $key);
             $this->assign('AnswerDatas', $AnswerDatas);
@@ -218,6 +221,7 @@ class Register extends Permissions
             $question_config = json_decode($question['question_config'], true);
             foreach ($question_config as $k=>$v) {
                 $key[] = $v['title'];
+                $question_key[] = $v['title'];
             }
 
             // 校验当前是否有提交数据并且时新增
@@ -225,13 +229,20 @@ class Register extends Permissions
                // 遍历保存新增表单信息
                 foreach ($post as $key=>$value) {
                     if(strstr($key, 'question_name')) {
-                        $answer_datas_edit[$key] = $value;
+                        $answer_datas_edit[] = $value;
                     }
                 }
+
+                // 遍历转存储
+                foreach ($question_key as $key => $value) {
+                    $answer_datas[$key]['title'] = $question_key[$key];
+                    $answer_datas[$key]['value'] = $answer_datas_edit[$key];
+                }
+
                 // 对固定数据及表单数据进行存储
                 $saveData = array(
                     'question_id' => 'question_0'.$post['question_id'],
-                    'answer_datas' => json_encode($answer_datas_edit),
+                    'answer_datas' => json_encode($answer_datas),
                     'source' => $post['source'],
                     'create_time' => date('Y-m-d H:i:s', time()),
                     'ip' => getIp(),
@@ -277,6 +288,7 @@ class Register extends Permissions
             $question_config = json_decode($question['question_config'], true);
             foreach ($question_config as $k=>$v) {
                 $key[] = $v['title'];
+                $question_key[] = $v['title'];
             }
 
             // 校验当前是否有提交数据并且时编辑
@@ -284,15 +296,25 @@ class Register extends Permissions
                 // 遍历保存修改后表单信息
                 foreach ($post as $key=>$value) {
                     if(strstr($key, 'question_name')) {
-                        $answer_datas_edit[$key] = $value;
+                        $answer_datas_edit[] = $value;
                     }
                 }
+
+                // 遍历转存储
+                foreach ($question_key as $key => $value) {
+                    $answer_datas[$key]['title'] = $question_key[$key];
+                    $answer_datas[$key]['value'] = $answer_datas_edit[$key];
+                }
+
 
                 // 对固定数据及表单数据进行存储
                 $saveData = array(
                     'update_time' => date('Y-m-d H:i:s', time()),
-                    'answer_datas' => json_encode($answer_datas_edit),
+                    'answer_datas' => json_encode($answer_datas),
                 );
+
+                // dump($saveData);
+                // exit;
 
                 // 更新数据表
                 $where = array('id' => $answer_id);
@@ -310,6 +332,10 @@ class Register extends Permissions
                 // 表单数据 json 转为 数组
                 $datas = json_decode($answer_datas['answer_datas'], true);
                 
+                // dump($answer_datas);
+                // dump($datas);
+                // exit;
+
                 $this->assign('answer_datas', $answer_datas);
                 $this->assign('datas', $datas);
                 $this->assign('type', 'edit');

@@ -2,29 +2,6 @@
 return [
 	'show_error_msg' => true,
 
-	'database'    =>  [
-        'type'            => 'mysql',
-	    // 服务器地址
-	    'hostname'        => '127.0.0.1',
-	    // 数据库名
-	    'database'        => 'webshop02',
-	    // 用户名
-	    'username'        => 'root',
-	    // 密码
-	    'password'        => 'root',
-	    // 端口
-	    'hostport'        => '3306',
-	    // 连接dsn
-	    'dsn'             => '',
-	    // 数据库连接参数
-	    'params'          => [],
-	    // 数据库编码默认采用utf8
-	    'charset'         => 'utf8',
-	    // 数据库表前缀
-	    'prefix'          => 'iwebshop_',
-    ],
-
-
     // 静态文件加载
 	'view_replace_str'  =>  [
 	    '__JS__' => '/static/notice/js',
@@ -82,7 +59,7 @@ return [
 	'openid_lists' => [
 		// 销售列表
 		'sales' => [
-			'oxmtH4zc7pJ15_zJb_lihQlPt-XA',			// GOOD LUCK
+            'oxmtH4zc7pJ15_zJb_lihQlPt-XA',			// GOOD LUCK
 			// 'oxmtH47022AeCYE1ZgOjj8LYNGcE',			// 西昂～
 			// 'oxmtH4-sWubdoqFO7hMMx5uDDnN0',			// 洛琪？
 			// 'oxmtH41AGViFUvgxuimTCSlZ1LSg',			// 宪照

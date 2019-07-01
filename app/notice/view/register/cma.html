@@ -247,7 +247,7 @@
                         $.ajax({
                             type: 'POST',
                             url: '__HREF__/notice/register/question_save',
-                            data: 'question_name_01=' + school + '&question_name_02=' + year + '&question_name_03=' + name + '&question_name_04=' + position + '&question_name_05=' + phone + '&question_name_06=' + email + '&question_source={$question.question_title}&question_id=question_0{$question.id}&init_timestamp=' + timestamp + '&equipment=' + equipment,
+                            data: 'question_name_01=' + name + '&question_name_02=' + school + '&question_name_03=' + year + '&question_name_04=' + position + '&question_name_05=' + phone + '&question_name_06=' + email + '&question_source={$question.question_title}&question_id=question_0{$question.id}&init_timestamp=' + timestamp + '&equipment=' + equipment,
                             // dataType: 'json',
                             async: true,
                             success: function (res) {

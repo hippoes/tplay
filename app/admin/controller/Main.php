@@ -60,6 +60,8 @@ class Main extends Permissions
         $web['status_file'] = Db::name('attachment')->where('status',0)->count();
         $web['ref_file'] = Db::name('attachment')->where('status',-1)->count();
         $web['message_num'] = Db::name('messages')->count();
+        // 报名信息总数
+        $web['question_answer'] = Db::name('question_answer')->count();
         $web['look_message'] = Db::name('messages')->where('is_look',0)->count();
 
 

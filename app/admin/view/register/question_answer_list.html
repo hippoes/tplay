@@ -65,7 +65,7 @@
         <tr>
             <td>{$vo.id}</td>
             {volist name="$vo.answer_datas" id="answer"}
-            <th>{$answer}</th>
+            <th>{$answer['value']}</th>
             {/volist}
             <td>{$vo.create_time}</td>
             <td>{$vo.total_time}秒</td>

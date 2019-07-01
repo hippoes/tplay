@@ -8,21 +8,25 @@ use think\Db;
 
 class Message extends Controller
 {
-    public function test($form = '', $username = '', $phone = '', $email = '')
+    public function sendApi()
     {
-        $form = !empty($form) ? $form : '';                 // 来源
-        $username = !empty($username) ? $username : '';     // 昵称
-        $phone = !empty($phone) ? $phone : '';              // 联系方式
-        $email = !empty($email) ? $email : '';              // 联系邮箱
+        $form = !empty($_GET['form']) ? $_GET['form'] : '';                 // 来源
+        $username = !empty($_GET['username']) ? $_GET['username'] : '';     // 昵称
+        $phone = !empty($_GET['phone']) ? $_GET['phone'] : '';              // 联系方式
+        $email = !empty($_GET['email']) ? $_GET['email'] : '';              // 联系邮箱
 
-        if (empty($form)) return false;
-        if (empty($username)) return false;
-        if (empty($phone)) return false;
-        if (empty($email)) return false;
+        if (empty($form)) exit('参数错误');
+        if (empty($username)) exit('参数错误');
+        if (empty($phone)) exit('参数错误');
+        if (empty($email)) exit('参数错误');
+
+        $res = $this->send($form, $username, $phone, $email);
+
+        dump($res);
 
     }
 
-    public function send($form = '', $username = '', $phone = '', $email = '')
+    public function send($form = '', $username = '', $phone = '', $email = '', $openid = '')
     {
         $form = !empty($form) ? $form : '';                 // 来源
         $username = !empty($username) ? $username : '';     // 昵称
@@ -92,14 +96,25 @@ class Message extends Controller
             'data' => $data,
         );
 
-        foreach ($sales_openids as $k => $v) {
-            $sendResult = $sendObj->InitSendTemplate($v, $mp_template_msg, '', '');
+        if (!empty($openid)) {
+            // 发送消息到指定销售
+            $sendResult = $sendObj->InitSendTemplate($openid, $mp_template_msg, '', '');
             if($sendResult == 'ok') {
-//                dump('发送成功:'.$v);
-                return '发送成功:'.$v;
+                return '发送成功:'.$openid;
             } else {
+                return '发送失败:'.$sendResult.' , openid:'.$openid;
+            }
+        } else {
+            // 发送消息到所有配置中销售
+            foreach ($sales_openids as $k => $v) {
+                $sendResult = $sendObj->InitSendTemplate($v, $mp_template_msg, '', '');
+                if($sendResult == 'ok') {
+//                dump('发送成功:'.$v);
+                    return '发送成功:'.$v;
+                } else {
 //                dump('发送失败:'.$sendResult.' , openid:'.$v);
-                return '发送失败:'.$sendResult.' , openid:'.$v;
+                    return '发送失败:'.$sendResult.' , openid:'.$v;
+                }
             }
         }
     }
