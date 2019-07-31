@@ -56,7 +56,8 @@
                 <td>{$vo.id}</td>
                 <td>{$vo.username}</td>
                 <td>{$vo.birthday_time}</td>
-                <td><a href="{$domain}/{$vo.composite}" target="_blank">{$domain}/{$vo.composite}</a></td>
+                <!-- <td><a href="{$domain}/{$vo.composite}" target="_blank">{$domain}/{$vo.composite}</a></td> -->
+                <td class="click_qr">{$domain}{$vo.composite}</td>
                 <td>{$vo.create_time}</td>
                 <td class="operation-menu">
                     <div class="layui-btn-group">
@@ -73,28 +74,30 @@
 
     {include file="public/foot"}
     
+    <script type='text/javascript' src='http://cdn.staticfile.org/jquery/2.1.1/jquery.min.js'></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
     <script type="text/javascript">
-
         // layui 弹窗显示二维码 
         layui.use('layer', function(){
             var layer = layui.layer;
-
-            // layer.msg('hello');
-
-            // layer.alert('酷毙了', {icon: 1});
-
-            // layer.msg('不开心。。', {icon: 5});
-
-            // layer.alert('只想简单的提示');  
-
-            //Ajax获取
-            /*$.post("{url:'admin/birthday/qrcode'}}", {}, function(str){
-              layer.open({
-                type: 1,
-                content: str //注意，如果str是object，那么需要字符拼接。
-              });
-            });  */
-
+            // 链接点击弹出二维码
+            $('.click_qr').click(function(){
+                // 弹出框
+                layer.open({
+                    title: '扫描二维码访问'
+                    ,content: "<div id='qrcode' style='width:100px;height:100px;margin:0 auto;'></div>"
+                });
+                // 清空现有二维码
+                $('#qrcode').empty();
+                // 获取当前链接地址
+                var url = $(this).text();
+                // 生成二维码
+                $("#qrcode").qrcode({
+                    width:100,
+                    height:100,
+                    text:url
+                });
+            });
         });              
 
 

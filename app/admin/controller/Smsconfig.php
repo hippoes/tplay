@@ -70,9 +70,13 @@ class Smsconfig extends Permissions
 
             $phone = (string)$post['phone'];
 
-            $param = '{"name":"Tplay用户"}';
+            $param = '{"code":"123456"}';
 
-            $smsto = SendSms($param,$phone);
+            // $smsto = SendSms($param,$phone);
+            $smsto = SendAliSms($param, $phone);
+            
+            dump($smsto);
+            exit;
             
             if(!empty($smsto)) {
                 return $this->error('发送失败');

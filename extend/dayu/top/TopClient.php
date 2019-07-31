@@ -5,7 +5,9 @@ class TopClient
 
 	public $secretKey;
 
-	public $gatewayUrl = "http://gw.api.taobao.com/router/rest";
+	// public $gatewayUrl = "http://gw.api.taobao.com/router/rest";
+	// public $gatewayUrl = "https://dysmsapi.aliyuncs.com/?Action=SendSms";
+	public $gatewayUrl = "https://dysmsapi.aliyuncs.com";
 
 	public $format = "xml";
 
@@ -25,6 +27,10 @@ class TopClient
 	public function __construct($appkey = "",$secretKey = ""){
 		$this->appkey = $appkey;
 		$this->secretKey = $secretKey ;
+		if (!defined("TOP_SDK_WORK_DIR"))
+		{
+			define("TOP_SDK_WORK_DIR", "/tmp/");
+		}
 	}
 
 	protected function generateSign($params)
@@ -273,6 +279,9 @@ class TopClient
 		// $requestUrl .= "timestamp=" . urlencode($sysParams["timestamp"]) . "&";
 		$requestUrl = substr($requestUrl, 0, -1);
 
+	   	dump($requestUrl);
+	   	exit;
+
 		//发起HTTP请求
 		try
 		{
@@ -323,6 +332,13 @@ class TopClient
 			$result->msg = "HTTP_RESPONSE_NOT_WELL_FORMED";
 			return $result;
 		}
+
+	   	// dump(TOP_SDK_WORK_DIR);
+	   	// dump($respWellFormed);
+    	// dump($respObject);
+    	// dump($respObject->code);
+    	exit;
+
 
 		//如果TOP返回了错误码，记录到业务错误日志中
 		if (isset($respObject->code))

@@ -140,6 +140,21 @@ function SendSms($param,$phone)
 }
 
 
+function SendAliSms($param, $phone) 
+{
+    // 配置信息
+    import('sms.SmsDemo');
+
+    $sms = new \SmsDemo();
+
+    $sms->SetConfig($phone, $param);
+
+    $res = $sms->sendSms();
+    
+    return  $res;
+}
+
+
 /**
  * 替换手机号码中间四位数字
  * @param  [type] $str [description]
